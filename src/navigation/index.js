@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, NetInfo } from 'react-native';
+import { View, Text, NetInfo, TouchableOpacity } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation';
-import { FontAwesome, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, Entypo, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
-import { drawerScreenNavigationOptions, stackScreenOptions, drawerStackNavigationOptions, drawerContentComponents } from './config';
+import {bottomScreenNavigationOptions} from './config';
 
 import {
     WelcomeScreen,
@@ -46,11 +46,50 @@ export default class MainNavigation extends Component {
             RegisterScreen,
             LogoutScreen,
             Main: createBottomTabNavigator({
-                TimelineScreen,
-                PostsScreen,
-                ChatScreen,
+                TimelineScreen: {
+                    screen: TimelineScreen,
+                    navigationOptions: bottomScreenNavigationOptions('Timeline', MaterialCommunityIcons, 'chart-timeline')
+                },
+                PostsScreen: {
+                    screen: PostsScreen,
+                    navigationOptions: bottomScreenNavigationOptions('Posts', Entypo, 'newsletter')
+                },
+                ChatScreen: {
+                    screen: createStackNavigator({
+                        screen: createDrawerNavigator({
+                            ChatScreen
+                        }, {
+                            drawerWidth: 200,
+                            drawerPosition: 'right'
+                        })
+                    }, {
+                        headerMode: 'screen',
+                        navigationOptions: ({navigation}) => ({
+                            title: 'Chat',
+                            headerTitle: 'Chat',
+                            headerTitleStyle: {
+                                color: '#FFF'
+                            },
+                            headerStyle: {
+                                backgroundColor: Colors.secondary
+                            },
+                            headerRight: <TouchableOpacity style={{paddingRight: 20}} onPress={() => navigation.toggleDrawer()}>
+                                <Entypo name="menu" size={24} color="#FFF" />
+                            </TouchableOpacity>
+                        })
+                    }),
+                    navigationOptions: bottomScreenNavigationOptions('Chat', Entypo, 'chat')
+                },
             }, {
-
+                tabBarOptions: {
+                    activeTintColor: Colors.secondary,
+                    labelStyle: {
+                        fontSize: 13
+                    },
+                    style: {
+                        backgroundColor: '#FFF'
+                    }
+                }
             }),
             ProfileScreen,
             ContactUsScreen,

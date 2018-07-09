@@ -9,16 +9,11 @@ import { createStackNavigator, DrawerItems } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-export const stackScreenOptions = (navigation, title) => {
-    if (navigation.state.params && navigation.state.params.title) {
-        title = navigation.state.params.title;
-    }
-
-    return {
-        title,
-        headerTitle: title
-    }
-}
+export const bottomScreenNavigationOptions = (title, IconFamily, iconName) => ({
+    title,
+    tabBarLabel: title,
+    tabBarIcon: ({tintColor}) => <IconFamily name={iconName} size={24} color={tintColor} />
+});
 
 // Function to render navigation options for stackNavigators inside the drawer Navigator.
 export const drawerStackNavigationOptions = (navigation, title, IconFamily) => ({
