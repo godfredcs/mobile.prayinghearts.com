@@ -45,54 +45,49 @@ export default class MainNavigation extends Component {
             ForgotPasswordScreen,
             RegisterScreen,
             LogoutScreen,
-            Main: createBottomTabNavigator({
-                TimelineScreen: {
-                    screen: TimelineScreen,
-                    navigationOptions: bottomScreenNavigationOptions('Timeline', MaterialCommunityIcons, 'chart-timeline')
-                },
-                PostsScreen: {
-                    screen: PostsScreen,
-                    navigationOptions: bottomScreenNavigationOptions('Posts', Entypo, 'newsletter')
-                },
-                ChatScreen: {
-                    screen: createStackNavigator({
-                        screen: createDrawerNavigator({
-                            ChatScreen
-                        }, {
-                            drawerWidth: 200,
-                            drawerPosition: 'right'
-                        })
-                    }, {
-                        headerMode: 'screen',
-                        navigationOptions: ({navigation}) => ({
-                            title: 'Chat',
-                            headerTitle: 'Chat',
-                            headerTitleStyle: {
-                                color: '#FFF'
-                            },
-                            headerStyle: {
-                                backgroundColor: Colors.secondary
-                            },
-                            headerRight: <TouchableOpacity style={{paddingRight: 20}} onPress={() => navigation.toggleDrawer()}>
-                                <Entypo name="menu" size={24} color="#FFF" />
-                            </TouchableOpacity>
-                        })
-                    }),
-                    navigationOptions: bottomScreenNavigationOptions('Chat', Entypo, 'chat')
-                },
-            }, {
-                tabBarOptions: {
-                    activeTintColor: Colors.secondary,
-                    labelStyle: {
-                        fontSize: 13
+            Main: createStackNavigator({
+                Home: createBottomTabNavigator({
+                    TimelineScreen: {
+                        screen: TimelineScreen,
+                        navigationOptions: bottomScreenNavigationOptions('Timeline', MaterialCommunityIcons, 'chart-timeline')
                     },
-                    style: {
-                        backgroundColor: '#FFF'
+                    PostsScreen: {
+                        screen: PostsScreen,
+                        navigationOptions: bottomScreenNavigationOptions('Posts', Entypo, 'newsletter')
+                    },
+                    ChatScreen: {
+                        screen: ChatScreen,
+                        navigationOptions: bottomScreenNavigationOptions('Chat', Entypo, 'chat')
+                    },
+                }, {
+                    tabBarOptions: {
+                        activeTintColor: Colors.secondary,
+                        labelStyle: {
+                            fontSize: 14
+                        },
+                        style: {
+                            backgroundColor: '#FFF'
+                        }
                     }
-                }
-            }),
-            ProfileScreen,
-            ContactUsScreen,
+                }),
+                ProfileScreen,
+                ContactUsScreen,
+            }, {
+                headerMode: 'screen',
+                navigationOptions: ({navigation}) => ({
+                    title: 'Chat',
+                    headerTitle: 'Chat',
+                    headerTitleStyle: {
+                        color: '#FFF'
+                    },
+                    headerStyle: {
+                        backgroundColor: Colors.secondary
+                    },
+                    headerRight: <TouchableOpacity style={{paddingRight: 20}} onPress={() => navigation.toggleDrawer()}>
+                        <FontAwesome name="user-circle-o" size={24} color="#FFF" />
+                    </TouchableOpacity>
+                })
+            })
         }, {
             headerMode: 'none',
             initialRouteName: "WelcomeScreen",
