@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, NetInfo, TouchableOpacity } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation';
-import { FontAwesome, Entypo, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Text, NetInfo } from 'react-native';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { Entypo, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
-import {bottomScreenNavigationOptions} from './config';
+import {bottomScreenNavigationOptions, bottomStackNavigationOptions} from './config';
 
 import {
     WelcomeScreen,
@@ -18,6 +18,7 @@ import {
     TimelineScreen,
     PostsScreen,
     ChatScreen,
+    ChatListScreen
 } from '../modules';
 
 export default class MainNavigation extends Component {
@@ -45,48 +46,54 @@ export default class MainNavigation extends Component {
             ForgotPasswordScreen,
             RegisterScreen,
             LogoutScreen,
-            Main: createStackNavigator({
-                Home: createBottomTabNavigator({
-                    TimelineScreen: {
-                        screen: TimelineScreen,
-                        navigationOptions: bottomScreenNavigationOptions('Timeline', MaterialCommunityIcons, 'chart-timeline')
-                    },
-                    PostsScreen: {
-                        screen: PostsScreen,
-                        navigationOptions: bottomScreenNavigationOptions('Posts', Entypo, 'newsletter')
-                    },
-                    ChatScreen: {
-                        screen: ChatScreen,
-                        navigationOptions: bottomScreenNavigationOptions('Chat', Entypo, 'chat')
-                    },
-                }, {
-                    tabBarOptions: {
-                        activeTintColor: Colors.secondary,
-                        labelStyle: {
-                            fontSize: 14
-                        },
-                        style: {
-                            backgroundColor: '#FFF'
-                        }
-                    }
-                }),
-                ProfileScreen,
-                ContactUsScreen,
+            Main: createBottomTabNavigator({
+                TimelineScreen: {
+                    screen: createStackNavigator({
+                        TimelineScreen: {screen: TimelineScreen}
+                    }, {
+                        navigationOptions: bottomStackNavigationOptions('Timeline')
+                    }),
+                    navigationOptions: bottomScreenNavigationOptions('Timeline', MaterialCommunityIcons, 'chart-timeline')
+                },
+                PostsScreen: {
+                    screen: createStackNavigator({
+                        PostsScreen: {screen: PostsScreen}
+                    }, {
+                        headerMode: 'screen',
+                        navigationOptions: bottomStackNavigationOptions('Posts')
+                    }),
+                    navigationOptions: bottomScreenNavigationOptions('Posts', Entypo, 'newsletter')
+                },
+                ChatScreen: {
+                    screen: createStackNavigator({
+                        ChatListScreen: {screen: ChatListScreen},
+                        ChatScreen: {screen: ChatScreen}
+                    }, {
+                        headerMode: 'screen',
+                        navigationOptions: bottomStackNavigationOptions('Chat')
+                    }),
+                    navigationOptions: bottomScreenNavigationOptions('Chat', Entypo, 'chat')
+                },
+                More: {
+                    screen: createStackNavigator({
+                        ProfileScreen,
+                        ContactUsScreen
+                    }, {
+                        headerMode: 'screen',
+                        navigationOptions: bottomStackNavigationOptions('More')
+                    }),
+                    navigationOptions: bottomScreenNavigationOptions('More', MaterialIcons, 'more-horiz')
+                }
             }, {
-                headerMode: 'screen',
-                navigationOptions: ({navigation}) => ({
-                    title: 'Chat',
-                    headerTitle: 'Chat',
-                    headerTitleStyle: {
-                        color: '#FFF'
+                tabBarOptions: {
+                    activeTintColor: Colors.secondary,
+                    labelStyle: {
+                        fontSize: 14
                     },
-                    headerStyle: {
-                        backgroundColor: Colors.secondary
-                    },
-                    headerRight: <TouchableOpacity style={{paddingRight: 20}} onPress={() => navigation.toggleDrawer()}>
-                        <FontAwesome name="user-circle-o" size={24} color="#FFF" />
-                    </TouchableOpacity>
-                })
+                    style: {
+                        backgroundColor: '#FFF'
+                    }
+                }
             })
         }, {
             headerMode: 'none',

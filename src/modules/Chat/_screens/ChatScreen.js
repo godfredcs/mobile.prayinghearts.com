@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
+    StatusBar,
     LayoutAnimation,
     KeyboardAvoidingView,
-    TouchableWithoutFeedback,
     Keyboard,
     ScrollView,
-    View,
-    Text,
+    View
 } from 'react-native';
 
 import MessageBox from '../_components/MessageBox';
@@ -17,6 +16,7 @@ class ChatScreen extends Component {
     state = {keyboardShow: false};
 
     componentDidMount() {
+        StatusBar.setBarStyle('light-content');
         this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this._keyboardDidShow);
         this.keyboardDidHideListener = Keyboard.addListener('keyboardWillHide', this._keyboardDidHide);
     }

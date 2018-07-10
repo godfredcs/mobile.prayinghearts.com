@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet, ScrollView, View, Text} from 'react-native';
+import {
+    StyleSheet,
+    StatusBar,
+    ScrollView,
+    View,
+    Text
+} from 'react-native';
 
 class PostsScreen extends Component {
+    componentDidMount() {
+        StatusBar.setBarStyle('light-content');
+    }
 
     render() {
         return (

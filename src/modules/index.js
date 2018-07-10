@@ -8,6 +8,8 @@ import ContactUsScreen from './Auth/_screens/ContactUsScreen';
 
 import PostsScreen from './Timeline/_screens/PostsScreen';
 import TimelineScreen from './Timeline/_screens/TimelineScreen';
+
+import ChatListScreen from './Chat/_screens/ChatListScreen';
 import ChatScreen from './Chat/_screens/ChatScreen';
 
 
@@ -26,6 +28,8 @@ export {
 
     PostsScreen,
     TimelineScreen,
+
+    ChatListScreen,
     ChatScreen,
 
     // Reducers

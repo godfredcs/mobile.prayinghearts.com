@@ -7,19 +7,18 @@ import {
 	Button
 } from 'react-native';
 
+import Colors from '../../../constants/Colors';
+
 
 class WelcomeScreen extends Component {
+	componentDidMount() {
+		StatusBar.setBarStyle('light-content');
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
-				<StatusBar
-            		translucent
-					backgroundColor="transparent"
-					barStyle="light-content"
-					networkActivityIndicatorVisible
-				/>
-
-				<Text style={{color: '#FFF'}}>This is the welcome screen of the application</Text>
+				<Text style={{color: '#FFF', fontWeight: 'bold', fontSize: 50}}>Praying Hearts</Text>
 
 				<Button
                     title="Next"
@@ -33,7 +32,7 @@ class WelcomeScreen extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'blue',
+		backgroundColor: Colors.secondary,
 		alignItems: 'center',
 		justifyContent: 'center'
 	}
