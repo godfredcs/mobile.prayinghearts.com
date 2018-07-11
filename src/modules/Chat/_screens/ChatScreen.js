@@ -40,6 +40,10 @@ class ChatScreen extends Component {
 
     _keyboardDidHide = () => this.setState({keyboardShow: false});
 
+    renderChatCards = () => {
+        return this.props.messages.map((message, index) => <ChatCard key={index} message={message} />);
+    }
+
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
@@ -47,21 +51,7 @@ class ChatScreen extends Component {
                         <ScrollView style={{flex: 1}}>
                                 <ChatCard />
                                 <ChatCard received />
-                                <ChatCard />
-                                <ChatCard received />
-                                <ChatCard />
-                                <ChatCard received />
-                                <ChatCard />
-                                <ChatCard received />
-                                <ChatCard />
-                                <ChatCard received />
-                                <ChatCard />
-                                <ChatCard received />
-                                <ChatCard />
-                                <ChatCard received />
-                                <ChatCard />
-                                <ChatCard received />
-                                <ChatCard />
+                                {this.renderChatCards()}
                         </ScrollView>
                         <View>
                             <MessageBox
@@ -91,8 +81,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    const {message_to_send} = state.chat;
-    return {message_to_send};
+    const {message_to_send, messages} = state.chat;
+    return {message_to_send, messages};
 };
 
 export default connect(mapStateToProps, {getSocketId, messageChanged, sendNewMessage})(ChatScreen);

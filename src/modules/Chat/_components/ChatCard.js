@@ -8,10 +8,10 @@ import {
 
 const {width} = Dimensions.get('window');
 
-export default ({received}) => (
+export default ({message, received}) => (
     <View style={[styles.container, {justifyContent: received ? 'flex-start' : 'flex-end'}]}>
         <View style={[styles.inner, {backgroundColor: received ? '#EEE' : '#CCC'}]}>
-            <Text>You said we was meeting here at noon?</Text>
+            <Text>{message ? message : 'You said we was meeting here at noon?'}</Text>
         </View>
     </View>
 );
