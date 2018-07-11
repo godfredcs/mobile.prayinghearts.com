@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, NetInfo } from 'react-native';
+import { connect } from 'react-redux';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { Entypo, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import {bottomScreenNavigationOptions, bottomStackNavigationOptions} from './config';
+
+import {getSocketId} from '../modules/Chat/_store/ChatActions';
 
 import {
     WelcomeScreen,
@@ -21,10 +24,12 @@ import {
     ChatListScreen
 } from '../modules';
 
-export default class MainNavigation extends Component {
+class MainNavigation extends Component {
     state = { online: true };
 
     componentDidMount() {
+        this.props.getSocketId();
+
         NetInfo.isConnected.fetch()
             .then(isConnected => this.setState({ online: isConnected }));
 
@@ -115,3 +120,5 @@ export default class MainNavigation extends Component {
         );
     }
 }
+
+export default connect(null, {getSocketId})(MainNavigation);

@@ -4,15 +4,17 @@ import {MaterialIcons} from '@expo/vector-icons';
 
 import Colors from '../../../constants/Colors';
 
-export default () => (
+export default ({message_to_send, messageChanged, sendNewMessage}) => (
     <View style={styles.container}>
         <TextInput
             multiline
             underlineColorAndroid='transparent'
             style={styles.textInput}
+            value={message_to_send}
+            onChangeText={value => messageChanged(value)}
         />
 
-        <TouchableOpacity style={styles.sendButton} onPress={() => console.log('this is it')}>
+        <TouchableOpacity style={styles.sendButton} onPress={() => sendNewMessage(message_to_send)}>
             <MaterialIcons name="send" color={Colors.secondary} size={24} />
         </TouchableOpacity>
     </View>

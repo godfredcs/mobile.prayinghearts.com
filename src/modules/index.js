@@ -14,6 +14,7 @@ import ChatScreen from './Chat/_screens/ChatScreen';
 
 
 import AuthReducer from './Auth/_store/AuthReducer';
+import ChatReducer from './Chat/_store/ChatReducer';
 
 
 export {
@@ -33,5 +34,6 @@ export {
     ChatScreen,
 
     // Reducers
-    AuthReducer
+    AuthReducer,
+    ChatReducer
 };

@@ -8,15 +8,21 @@ import {
     ScrollView,
     View
 } from 'react-native';
+import {connect} from 'react-redux';
 
 import MessageBox from '../_components/MessageBox';
 import ChatCard from '../_components/ChatCard';
+
+import {getSocketId, messageChanged, sendNewMessage} from '../_store/ChatActions';
 
 class ChatScreen extends Component {
     state = {keyboardShow: false};
 
     componentDidMount() {
+        this.props.getSocketId();
+
         StatusBar.setBarStyle('light-content');
+
         this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this._keyboardDidShow);
         this.keyboardDidHideListener = Keyboard.addListener('keyboardWillHide', this._keyboardDidHide);
     }
@@ -58,7 +64,11 @@ class ChatScreen extends Component {
                                 <ChatCard />
                         </ScrollView>
                         <View>
-                            <MessageBox />
+                            <MessageBox
+                                message_to_send={this.props.message_to_send}
+                                messageChanged={this.props.messageChanged}
+                                sendNewMessage={this.props.sendNewMessage}
+                            />
                             <View style={{height: this.state.keyboardShow ? 60 : 0}}/>
                         </View>
                     </View>
@@ -78,6 +88,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between'
     }
-})
+});
 
-export default ChatScreen;
+const mapStateToProps = state => {
+    const {message_to_send} = state.chat;
+    return {message_to_send};
+};
+
+export default connect(mapStateToProps, {getSocketId, messageChanged, sendNewMessage})(ChatScreen);

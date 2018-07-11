@@ -3,7 +3,8 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import {
-	AuthReducer
+	AuthReducer,
+	ChatReducer
 } from '../modules';
 
 const rootPersistConfig = {
@@ -13,6 +14,7 @@ const rootPersistConfig = {
 
 const rootReducer = combineReducers({
 	auth: AuthReducer,
+	chat: ChatReducer
 });
 
 export default persistReducer(rootPersistConfig, rootReducer);
