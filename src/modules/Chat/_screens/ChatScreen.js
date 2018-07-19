@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    const {message_to_send, messages, messages_increased} = state.chat;
+    const {message_to_send, messages, messages_increased} = state.chat; // Note: messages_increased is very crucial for autorefresh of messages.
 
     return {message_to_send, messages, messages_increased};
 };
