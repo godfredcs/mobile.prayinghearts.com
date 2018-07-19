@@ -1,9 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import Axios from 'axios';
-import * as Storage from '../utils/Storage';
 
 export const axios = Axios.create({
-	baseURL: 'https://api.test.ezifood.com/api/v1',
+	baseURL: 'http://192.168.8.103:5000',
 
 	headers: {
 		'X-Requested-With': 'XMLHttpRequest'

@@ -1,7 +1,7 @@
 import {AsyncStorage} from 'react-native';
 import socket from '../../../services/Socket';
 
-import {GET_SOCKET_ID_SUCCESS, MESSAGE_CHANGED, SEND_NEW_MESSAGE_SUCCESS} from './ChatActionTypes';
+import {GET_SOCKET_ID_SUCCESS, MESSAGE_CHANGED, SEND_NEW_MESSAGE_SUCCESS, NEW_MESSAGE} from './ChatActionTypes';
 
 export const getSocketId = () => async dispatch => {
     try {
@@ -32,5 +32,15 @@ export const sendNewMessage = message => async dispatch => {
         }
     } catch (error) {
         console.log('this is the error we got from trying to send a message ', error);
+    }
+};
+
+export const receiveMessage = () => async dispatch => {
+    try {
+        socket.on('new_message', message => {
+            dispatch({type: NEW_MESSAGE, payload: message})
+        })
+    } catch (error) {
+        console.log('this is the error ', error);
     }
 };

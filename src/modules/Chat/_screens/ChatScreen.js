@@ -13,14 +13,12 @@ import {connect} from 'react-redux';
 import MessageBox from '../_components/MessageBox';
 import ChatCard from '../_components/ChatCard';
 
-import {getSocketId, messageChanged, sendNewMessage} from '../_store/ChatActions';
+import {messageChanged, sendNewMessage} from '../_store/ChatActions';
 
 class ChatScreen extends Component {
     state = {keyboardShow: false};
 
     componentDidMount() {
-        this.props.getSocketId();
-
         StatusBar.setBarStyle('light-content');
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this._keyboardDidShow);
@@ -41,7 +39,7 @@ class ChatScreen extends Component {
     _keyboardDidHide = () => this.setState({keyboardShow: false});
 
     renderChatCards = () => {
-        return this.props.messages.map((message, index) => <ChatCard key={index} message={message} />);
+        return this.props.messages.map((message, index) => <ChatCard key={index} message={message.message} received={message.received} />);
     }
 
     render() {
@@ -81,8 +79,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    const {message_to_send, messages} = state.chat;
-    return {message_to_send, messages};
+    const {message_to_send, messages, messages_increased} = state.chat;
+
+    return {message_to_send, messages, messages_increased};
 };
 
-export default connect(mapStateToProps, {getSocketId, messageChanged, sendNewMessage})(ChatScreen);
+export default connect(mapStateToProps, {messageChanged, sendNewMessage})(ChatScreen);

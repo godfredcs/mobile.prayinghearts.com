@@ -1,10 +1,11 @@
-import {GET_SOCKET_ID_SUCCESS, SEND_NEW_MESSAGE_SUCCESS, MESSAGE_CHANGED} from './ChatActionTypes';
+import {GET_SOCKET_ID_SUCCESS, SEND_NEW_MESSAGE_SUCCESS, MESSAGE_CHANGED, NEW_MESSAGE} from './ChatActionTypes';
 
 const INITIAL_STATE = {
     socket_id: null,
     message_to_send: '',
     new_message: '',
-    messages: []
+    messages: [],
+    messages_increased: false
 };
 
 export default (state=INITIAL_STATE, action) => {
@@ -17,8 +18,12 @@ export default (state=INITIAL_STATE, action) => {
             return {...state, message_to_send: action.payload};
 
         case SEND_NEW_MESSAGE_SUCCESS:
-            state.messages.push(action.payload);
+            state.messages.push({message: action.payload, received: false});
             return {...state, message_to_send: ''};
+
+        case NEW_MESSAGE:
+            state.messages.push({message: action.payload, received: true});
+            return {...state, messages_increased: !state.messages_increased };
 
         default:
             return state;

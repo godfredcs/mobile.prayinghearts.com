@@ -8,11 +8,16 @@ import {
     Text,
     TouchableOpacity
 } from 'react-native';
+import {connect} from 'react-redux';
+
+import {getSocketId, receiveMessage} from '../_store/ChatActions';
 
 import Colors from '../../../constants/Colors';
 
 class ChatListScreen extends Component {
     componentDidMount() {
+        this.props.getSocketId();
+        this.props.receiveMessage();
         StatusBar.setBarStyle('light-content');
     }
 
@@ -24,13 +29,13 @@ class ChatListScreen extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen')}>
+                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {name: 'Kwame'})}>
                         <Text>Kwame</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen')}>
+                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {name: 'Frank'})}>
                         <Text>Frank</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen')}>
+                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {name: 'Paul'})}>
                         <Text>Paul</Text>
                     </TouchableOpacity>
                 </ScrollView>
@@ -51,4 +56,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ChatListScreen;
+const mapStateToProps = state => {
+    return {};
+};
+
+export default connect(mapStateToProps, {getSocketId, receiveMessage})(ChatListScreen);

@@ -72,7 +72,13 @@ class MainNavigation extends Component {
                 ChatScreen: {
                     screen: createStackNavigator({
                         ChatListScreen: {screen: ChatListScreen},
-                        ChatScreen: {screen: ChatScreen}
+                        ChatScreen: {
+                            screen: ChatScreen,
+                            navigationOptions: ({navigation}) => ({
+                                title: navigation.state.params.name,
+                                headerTitle: navigation.state.params.name
+                            })
+                        }
                     }, {
                         headerMode: 'screen',
                         navigationOptions: bottomStackNavigationOptions('Chat')
