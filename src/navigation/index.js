@@ -16,7 +16,10 @@ import {
     RegisterScreen,
     LogoutScreen,
     ProfileScreen,
-    ContactUsScreen,
+    ContactScreen,
+    AboutScreen,
+
+    MoreScreen,
 
     TimelineScreen,
     PostsScreen,
@@ -87,8 +90,10 @@ class MainNavigation extends Component {
                 },
                 More: {
                     screen: createStackNavigator({
+                        MoreScreen,
                         ProfileScreen,
-                        ContactUsScreen
+                        ContactScreen,
+                        AboutScreen
                     }, {
                         headerMode: 'screen',
                         navigationOptions: bottomStackNavigationOptions('More')

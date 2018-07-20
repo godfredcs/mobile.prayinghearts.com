@@ -5,7 +5,7 @@ import {
     Text
 } from 'react-native';
 
-class ContactUsScreen extends Component {
+class ContactScreen extends Component {
 
     render() {
         return (
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ContactUsScreen;
+export default ContactScreen;

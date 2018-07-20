@@ -4,7 +4,10 @@ import ForgotPasswordScreen from './Auth/_screens/ForgotPasswordScreen';
 import RegisterScreen from './Auth/_screens/RegisterScreen';
 import LogoutScreen from './Auth/_screens/LogoutScreen';
 import ProfileScreen from './Auth/_screens/ProfileScreen';
-import ContactUsScreen from './Auth/_screens/ContactUsScreen';
+import ContactScreen from './Auth/_screens/ContactScreen';
+import AboutScreen from './Auth/_screens/AboutScreen';
+
+import MoreScreen from './More/_screens/MoreScreen';
 
 import PostsScreen from './Timeline/_screens/PostsScreen';
 import TimelineScreen from './Timeline/_screens/TimelineScreen';
@@ -25,7 +28,10 @@ export {
     RegisterScreen,
     LogoutScreen,
     ProfileScreen,
-    ContactUsScreen,
+    ContactScreen,
+    AboutScreen,
+
+    MoreScreen,
 
     PostsScreen,
     TimelineScreen,
