@@ -1,11 +1,10 @@
 import {
-    FIRSTNAME_CHANGED, LASTNAME_CHANGED, EMAIL_CHANGED, PASSWORD_CHANGED, CONFIRMATION_PASSWORD_CHANGED
+    EMAIL_CHANGED, USERNAME_CHANGED, PASSWORD_CHANGED, CONFIRMATION_PASSWORD_CHANGED
 } from './AuthActionTypes';
 
 const INITIAL_STATE = {
-    firstname: '',
-    lastname: '',
     email: '',
+    username: '',
     password: '',
     password_confirmation: '',
     auth_loading: false
@@ -13,14 +12,11 @@ const INITIAL_STATE = {
 
 export default (state=INITIAL_STATE, action) => {
     switch (action.type) {
-        case FIRSTNAME_CHANGED:
-            return {...state, firstname: action.payload};
-
-        case LASTNAME_CHANGED:
-            return {...state, lastname: action.payload};
-
         case EMAIL_CHANGED:
             return {...state, email: action.payload};
+
+        case USERNAME_CHANGED:
+            return {...state, username: action.payload};
 
         case PASSWORD_CHANGED:
             return {...state, password: action.payload};

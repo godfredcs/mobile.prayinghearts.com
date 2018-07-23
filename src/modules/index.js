@@ -9,14 +9,15 @@ import AboutScreen from './Auth/_screens/AboutScreen';
 
 import MoreScreen from './More/_screens/MoreScreen';
 
-import PostsScreen from './Timeline/_screens/PostsScreen';
-import TimelineScreen from './Timeline/_screens/TimelineScreen';
+import PostsScreen from './Posts/_screens/PostsScreen';
+import TimelineScreen from './Posts/_screens/TimelineScreen';
 
 import ChatListScreen from './Chat/_screens/ChatListScreen';
 import ChatScreen from './Chat/_screens/ChatScreen';
 
 
 import AuthReducer from './Auth/_store/AuthReducer';
+import PostsReducer from './Posts/_store/PostsReducer';
 import ChatReducer from './Chat/_store/ChatReducer';
 
 
@@ -41,5 +42,6 @@ export {
 
     // Reducers
     AuthReducer,
-    ChatReducer
+    ChatReducer,
+    PostsReducer
 };

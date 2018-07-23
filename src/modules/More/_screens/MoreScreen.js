@@ -6,15 +6,15 @@ class MoreScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('ProfileScreen')}>
+                <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('ProfileScreen', {title: 'Profile'})}>
                     <Text>Profile</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('ContactScreen')}>
+                <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('ContactScreen', {title: 'Contact'})}>
                     <Text>Contact</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('AboutScreen')}>
+                <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('AboutScreen', {title: 'About'})}>
                     <Text>About</Text>
                 </TouchableOpacity>
             </View>

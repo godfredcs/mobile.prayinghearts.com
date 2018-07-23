@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {
-    StyleSheet,
-    StatusBar,
-    ScrollView,
-    View,
-    Text
-} from 'react-native';
+import {StyleSheet, StatusBar, ScrollView, View} from 'react-native';
+import {connect} from 'react-redux';
+
+import PostCard from '../_components/PostCard';
 
 class TimelineScreen extends Component {
     componentDidMount() {
@@ -15,7 +12,9 @@ class TimelineScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>This is the TimelineScreen</Text>
+                <ScrollView>
+                    <PostCard />
+                </ScrollView>
             </View>
         );
     }
@@ -28,4 +27,8 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TimelineScreen;
+const mapStateToProps = state => {
+    return {};
+};
+
+export default connect(mapStateToProps, {})(TimelineScreen);

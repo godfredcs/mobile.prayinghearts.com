@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Feather} from '@expo/vector-icons';
 
 import {
-    firstnameChanged, lastnameChanged, emailChanged, passwordChanged, confirmationPasswordChanged
+    emailChanged, usernameChanged, passwordChanged, confirmationPasswordChanged
 } from '../_store/AuthActions';
 
 import Colors from '../../../constants/Colors';
@@ -23,24 +23,18 @@ class RegisterForm extends Component {
                 <View style={{alignItems: 'center'}}>
                     <Feather name="user" size={60} color={Colors.secondary} />
                 </View>
-                <View style={{ width: '100%', marginVertical: 20 }}>
-                    <CustomInput
-                        placeholder="Firstname"
-                        onChangeText={value => this.props.firstnameChanged(value)}
-                    />
-                </View>
-
-                <View style={{ width: '100%', marginVertical: 20 }}>
-                    <CustomInput
-                        placeholder="Lastname"
-                        onChangeText={value => this.props.lastnameChanged(value)}
-                    />
-                </View>
 
                 <View style={{ width: '100%', marginVertical: 20 }}>
                     <CustomInput
                         placeholder="Email"
                         onChangeText={value => this.props.emailChanged(value)}
+                    />
+                </View>
+
+                <View style={{ width: '100%', marginVertical: 20 }}>
+                    <CustomInput
+                        placeholder="Username"
+                        onChangeText={value => this.props.usernameChanged(value)}
                     />
                 </View>
 
@@ -89,10 +83,10 @@ class RegisterForm extends Component {
 }
 
 const mapStateToProps = state => {
-    const {firstname, lastname, email, password, password_confirmation} = state.auth;
-    return {firstname, lastname, email, password, password_confirmation};
+    const {email, username, password, password_confirmation} = state.auth;
+    return {email, username, password, password_confirmation};
 };
 
 export default connect(mapStateToProps, {
-    firstnameChanged, lastnameChanged, emailChanged, passwordChanged, confirmationPasswordChanged
+    emailChanged, usernameChanged, passwordChanged, confirmationPasswordChanged
 })(RegisterForm);

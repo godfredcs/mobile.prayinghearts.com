@@ -29,13 +29,13 @@ class ChatListScreen extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {name: 'Kwame'})}>
+                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {title: 'Kwame'})}>
                         <Text>Kwame</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {name: 'Frank'})}>
+                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {title: 'Frank'})}>
                         <Text>Frank</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {name: 'Paul'})}>
+                    <TouchableOpacity style={styles.touchableName} onPress={() => this.props.navigation.navigate('ChatScreen', {title: 'Paul'})}>
                         <Text>Paul</Text>
                     </TouchableOpacity>
                 </ScrollView>

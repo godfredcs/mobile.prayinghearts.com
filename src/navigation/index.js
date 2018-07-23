@@ -91,9 +91,27 @@ class MainNavigation extends Component {
                 More: {
                     screen: createStackNavigator({
                         MoreScreen,
-                        ProfileScreen,
-                        ContactScreen,
-                        AboutScreen
+                        ProfileScreen: {
+                            screen: ProfileScreen,
+                            navigationOptions: ({navigation}) => ({
+                                title: navigation.state.params.title,
+                                headerTitle: navigation.state.params.title
+                            })
+                        },
+                        ContactScreen: {
+                            screen: ContactScreen,
+                            navigationOptions: ({navigation}) => ({
+                                title: navigation.state.params.title,
+                                headerTitle: navigation.state.params.title
+                            })
+                        },
+                        AboutScreen: {
+                            screen: AboutScreen,
+                            navigationOptions: ({navigation}) => ({
+                                title: navigation.state.params.title,
+                                headerTitle: navigation.state.params.title
+                            })
+                        }
                     }, {
                         headerMode: 'screen',
                         navigationOptions: bottomStackNavigationOptions('More')
