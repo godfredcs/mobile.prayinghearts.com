@@ -42,6 +42,6 @@ export {
 
     // Reducers
     AuthReducer,
-    ChatReducer,
-    PostsReducer
+    PostsReducer,
+    ChatReducer
 };

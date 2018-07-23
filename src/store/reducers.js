@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import {
 	AuthReducer,
+	PostsReducer,
 	ChatReducer
 } from '../modules';
 
@@ -14,6 +15,7 @@ const rootPersistConfig = {
 
 const rootReducer = combineReducers({
 	auth: AuthReducer,
+	posts: PostsReducer,
 	chat: ChatReducer
 });
 
