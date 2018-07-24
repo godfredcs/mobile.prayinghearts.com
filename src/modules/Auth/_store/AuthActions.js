@@ -1,5 +1,9 @@
+import Auth from './AuthServices';
+import {AsyncStorage} from 'react-native';
 import {
-    EMAIL_CHANGED, USERNAME_CHANGED, PASSWORD_CHANGED, CONFIRMATION_PASSWORD_CHANGED
+    EMAIL_CHANGED, USERNAME_CHANGED, USERNAME_OR_EMAIL_CHANGED, PASSWORD_CHANGED, CONFIRMATION_PASSWORD_CHANGED,
+    ATTEMPT_REGISTER, REGISTER_SUCCESS, REGISTER_FAIL,
+    ATTEMPT_LOGIN, LOGIN_SUCCESS, LOGIN_FAIL
 } from './AuthActionTypes';
 
 export const emailChanged = payload => ({
@@ -12,6 +16,11 @@ export const usernameChanged = payload => ({
     payload
 });
 
+export const usernameOrEmailChanged = payload => ({
+    type: USERNAME_OR_EMAIL_CHANGED,
+    payload
+});
+
 export const passwordChanged = payload => ({
     type: PASSWORD_CHANGED,
     payload
@@ -21,3 +30,40 @@ export const confirmationPasswordChanged = payload => ({
     type: CONFIRMATION_PASSWORD_CHANGED,
     payload
 });
+
+export const attemptRegister = (user) => async dispatch => {
+    try {
+        dispatch({type: ATTEMPT_REGISTER});
+        console.log(`this is the user: ${user}`)
+        return;
+        const auth = await Auth.store(user);
+
+        if (auth) {
+            await AsyncStorage.setItem('api_token', auth.api_token);
+            console.log(`this is the user we got when we registered ${auth}`);
+            dispatch({type: REGISTER_SUCCESS, payload: auth});
+        }
+    } catch (error) {
+        console.log(`these are the errors we get from registering ${error}`);
+        dispatch({type: REGISTER_FAIL, payload: error});
+    }
+};
+
+export const attemptLogin = ({username_or_email, password}, navigateToMainScreen) => async dispatch => {
+    try {
+        dispatch({type: ATTEMPT_LOGIN});
+        const auth = await Auth.authenticate({username_or_email, password});
+
+        if (auth) {
+            await AsyncStorage.setItem('api_token', auth.api_token);
+            dispatch({type: LOGIN_SUCCESS, payload: auth});
+
+            if (navigateToMainScreen) {
+                navigateToMainScreen();
+            }
+        }
+    } catch (error) {
+        console.log(`these are the errors we get from login ${JSON.stringify(error)}`);
+        dispatch({type: LOGIN_FAIL, payload: error});
+    }
+};

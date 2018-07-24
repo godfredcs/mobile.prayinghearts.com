@@ -1,4 +1,4 @@
-import {axios} from './index';
+import {axios} from '../../../services';
 
 export default {
 	/**
@@ -11,10 +11,10 @@ export default {
 	},
 
 	/**
-	 * Store a new user (Sign up)
+	 * Store a new user (Register)
 	 */
 	store(user) {
-		return axios.post('users', user)
+		return axios.post('users/register', user)
 					.then(response => Promise.resolve(response.data))
 					.catch(error => Promise.reject(error.response.data));
 	},
@@ -100,3 +100,4 @@ export default {
 			.catch(error => Promise.reject(error.response.data));
 	}
 }
+

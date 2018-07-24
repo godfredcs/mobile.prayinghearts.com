@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, LayoutAnimation } from 'react-native';
 
-import { emailChanged, passwordChanged } from '../_store/AuthActions';
+import { usernameOrEmailChanged, passwordChanged, attemptLogin } from '../_store/AuthActions';
 
 import Colors from '../../../constants/Colors';
 import { Spinner, CustomInput, CustomButton } from '../../../components';
@@ -12,13 +12,18 @@ class LoginForm extends Component {
         LayoutAnimation.spring();
     }
 
+    attemptLogin = () => {
+        const {username_or_email, password} = this.props;
+        this.props.attemptLogin({username_or_email, password}, () => this.props.navigation.navigate('Main'));
+    }
+
     render() {
         return (
             <View style={{ padding: 40 }}>
                 <View style={{ width: '100%', marginVertical: 20 }}>
                     <CustomInput
-                        placeholder="Email"
-                        onChangeText={value => this.props.emailChanged(value)}
+                        placeholder="Email / Username"
+                        onChangeText={value => this.props.usernameOrEmailChanged(value)}
                     />
                 </View>
 
@@ -32,7 +37,7 @@ class LoginForm extends Component {
 
                 <View style={{ marginTop: 20 }}>
                     {
-                        this.props.auth_loading
+                        this.props.login_loading
 
                             ? <Spinner />
 
@@ -40,7 +45,7 @@ class LoginForm extends Component {
                                 title="Log in"
                                 color={Colors.secondary}
                                 containerStyle={{borderWidth: 1, borderColor: Colors.secondary, borderRadius: 30}}
-                                onPress={() => this.props.navigation.navigate('Main')}
+                                onPress={this.attemptLogin}
                             />
                     }
                 </View>
@@ -66,8 +71,8 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = state => {
-    const {email, password, auth_loading} = state.auth;
-    return {email, password, auth_loading};
+    const {username_or_email, password, login_loading} = state.auth;
+    return {username_or_email, password, login_loading};
 };
 
-export default connect(mapStateToProps, {emailChanged, passwordChanged})(LoginForm);
+export default connect(mapStateToProps, {usernameOrEmailChanged, passwordChanged, attemptLogin})(LoginForm);

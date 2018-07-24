@@ -1,5 +1,6 @@
 export const EMAIL_CHANGED = 'email_changed';
 export const USERNAME_CHANGED = 'username_changed';
+export const USERNAME_OR_EMAIL_CHANGED = 'username_or_email_changed';
 export const PASSWORD_CHANGED = 'password_changed';
 export const CONFIRMATION_PASSWORD_CHANGED = 'confirmation_password_changed';
 

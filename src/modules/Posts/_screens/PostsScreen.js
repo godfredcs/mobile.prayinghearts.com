@@ -7,6 +7,8 @@ import {
     Text
 } from 'react-native';
 
+import CreateButton from '../_components/CreateButton';
+
 class PostsScreen extends Component {
     componentDidMount() {
         StatusBar.setBarStyle('light-content');
@@ -15,7 +17,10 @@ class PostsScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>This is the PostsScreen</Text>
+                <ScrollView style={{flex: 1}}>
+                    <Text>This is the PostsScreen</Text>
+                </ScrollView>
+                <CreateButton />
             </View>
         );
     }
@@ -24,8 +29,8 @@ class PostsScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF'
-    }
+        backgroundColor: '#FFF',
+    },
 })
 
 export default PostsScreen;

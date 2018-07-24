@@ -14,7 +14,7 @@ class PostCard extends React.Component {
                     <Text style={{color: '#777', fontSize: 12}}>{this.renderTime()}</Text>
                 </View>
 
-                <View style={{padding: 10}}>
+                <View style={{paddingVertical: 15, paddingHorizontal: 10}}>
                     <Text>{this.props.post.body}</Text>
                 </View>
 
@@ -35,12 +35,9 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFF',
         margin: 10,
-		position: 'relative',
-		elevation: 2,
-		shadowColor: '#000',
-		backgroundColor: '#FFF',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: .1
+        position: 'relative',
+        borderWidth: 1,
+        borderColor: '#EEE'
     },
     moreButton: {
         paddingVertical: 10,
