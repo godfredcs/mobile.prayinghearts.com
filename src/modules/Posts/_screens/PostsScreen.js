@@ -8,8 +8,11 @@ import {
 } from 'react-native';
 
 import CreateButton from '../_components/CreateButton';
+import CreatePostModal from '../_components/CreatePostModal'
 
 class PostsScreen extends Component {
+    state = {openCreatePostModal: false};
+
     componentDidMount() {
         StatusBar.setBarStyle('light-content');
     }
@@ -20,7 +23,14 @@ class PostsScreen extends Component {
                 <ScrollView style={{flex: 1}}>
                     <Text>This is the PostsScreen</Text>
                 </ScrollView>
-                <CreateButton />
+
+                <CreateButton onPress={() => this.setState({openCreatePostModal: true})} />
+
+                <CreatePostModal
+                    title="Create Post"
+                    visible={this.state.openCreatePostModal}
+                    close={() => this.setState({openCreatePostModal: false})}
+                />
             </View>
         );
     }
