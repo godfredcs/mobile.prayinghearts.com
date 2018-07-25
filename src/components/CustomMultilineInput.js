@@ -2,7 +2,7 @@ import React from 'react';
 import {TextInput} from 'react-native';
 import Colors from '../constants/Colors';
 
-export default ({editable=true, style, value="", placeholder="", numberOfLines=5, onChange, onEndEditing}) => (
+export default ({editable=true, style, value="", placeholder="", numberOfLines=5, onChangeText, onEndEditing}) => (
     <TextInput
         multiline
         autoCorrect
@@ -13,7 +13,7 @@ export default ({editable=true, style, value="", placeholder="", numberOfLines=5
         placeholder={placeholder}
         keyboardType="default"
         value={value}
-        onChangeText={onChange}
+        onChangeText={onChangeText}
         onEndEditing={onEndEditing}
         clearButtonMode="while-editing"
         style={[styles.textInput, style]}

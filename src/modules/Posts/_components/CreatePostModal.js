@@ -2,11 +2,21 @@ import React from 'react';
 import {View, Text, Modal, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 
+import {createPost, postTitleChanged, postBodyChanged} from '../_store/PostsActions';
+
 import {Spinner, CustomInput, CustomMultilineInput, CustomButton} from '../../../components';
 import Colors from '../../../constants/Colors';
 
 class CreatePostModal extends React.Component {
     state = {loading: false}
+
+    submitPost = () => {
+        Keyboard.dismiss();
+
+        const {_id, post_title, post_body} = this.props;
+
+        this.props.createPost({user: _id, title: post_title, body: post_body});
+    }
 
 	render() {
 		const {title, visible, close} = this.props;
@@ -32,23 +42,31 @@ class CreatePostModal extends React.Component {
                             </View>
 
                             <View style={{margin: 20}}>
-                                <CustomInput placeholder="Title" />
+                                <CustomInput
+                                    value={this.props.post_title}
+                                    placeholder="Title"
+                                    onChangeText={value => this.props.postTitleChanged(value)}
+                                />
                             </View>
 
                             <View style={{marginHorizontal: 20, marginTop: 20}}>
-                                <CustomMultilineInput placeholder="Write your post here ..." />
+                                <CustomMultilineInput
+                                    value={this.props.post_body}
+                                    placeholder="Write your post here ..."
+                                    onChangeText={value => this.props.postBodyChanged(value)}
+                                />
                             </View>
 
                             <View style={{margin: 20}}>
                                 {
-                                    this.state.loading
+                                    this.props.creating_post_loading
                                         ? <Spinner />
                                         : <CustomButton
                                             title="Post"
                                             color="#FFF"
                                             containerStyle={{borderRadius: 30}}
                                             backgroundColor={Colors.secondary}
-                                            onPress={() => this.setState({loading: true})}
+                                            onPress={this.submitPost}
                                         />
                                 }
                             </View>
@@ -97,7 +115,10 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-	return {};
+    const {creating_post_loading, post_title, post_body} = state.posts;
+    const {user: {_id}} = state.auth;
+
+	return {creating_post_loading, _id, post_title, post_body};
 };
 
-export default connect(mapStateToProps, {})(CreatePostModal);
+export default connect(mapStateToProps, {createPost, postTitleChanged, postBodyChanged})(CreatePostModal);
