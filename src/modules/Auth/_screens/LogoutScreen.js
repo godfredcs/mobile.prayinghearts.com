@@ -1,22 +1,20 @@
-import {Component} from 'react';
-import {AsyncStorage, Alert} from 'react-native';
+import React from 'react';
+import {connect} from 'react-redux';
 
-class LogoutScreen extends Component {
+import {attemptLogout} from '../_store/AuthActions';
+
+class LogoutScreen extends React.Component {
     componentDidMount() {
-        this.logout();
+        this.props.attemptLogout(this.navigateToLoginScreen);
     }
 
-    logout = async () => {
-        try {
-            await AsyncStorage.removeItem('api_token', () => this.props.navigation.navigate('LoginScreen'));
-        } catch (error) {
-            Alert.alert('Logout failed', 'Trouble logging user out');
-        }
-    };
+    navigateToLoginScreen = () => {
+        this.props.navigation.navigate('LoginScreen');
+    }
 
     render() {
         return null;
     }
 }
 
-export default LogoutScreen;
+export default connect(null, {attemptLogout})(LogoutScreen);

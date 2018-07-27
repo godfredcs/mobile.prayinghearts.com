@@ -3,7 +3,8 @@ import {AsyncStorage} from 'react-native';
 import {
     EMAIL_CHANGED, USERNAME_CHANGED, USERNAME_OR_EMAIL_CHANGED, PASSWORD_CHANGED, CONFIRMATION_PASSWORD_CHANGED,
     ATTEMPT_REGISTER, REGISTER_SUCCESS, REGISTER_FAIL,
-    ATTEMPT_LOGIN, LOGIN_SUCCESS, LOGIN_FAIL
+    ATTEMPT_LOGIN, LOGIN_SUCCESS, LOGIN_FAIL,
+    ATTEMPT_LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL
 } from './AuthActionTypes';
 
 export const emailChanged = payload => ({
@@ -74,3 +75,20 @@ export const attemptLogin = (details, navigateToMainScreen) => async dispatch =>
         dispatch({type: LOGIN_FAIL, payload: error});
     }
 };
+
+export const attemptLogout = navigateToLoginScreen => async dispatch => {
+    try {
+        dispatch({type: ATTEMPT_LOGOUT});
+
+        await AsyncStorage.removeItem('user_id');
+        await AsyncStorage.removeItem('api_token');
+
+        if (navigateToLoginScreen) {
+            navigateToLoginScreen();
+        }
+
+        dispatch({type: LOGOUT_SUCCESS});
+    } catch (error) {
+        dispatch({type: LOGOUT_FAIL});
+    }
+}

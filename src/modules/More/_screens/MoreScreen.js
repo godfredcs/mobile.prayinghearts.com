@@ -17,6 +17,10 @@ class MoreScreen extends Component {
                 <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('AboutScreen', {title: 'About'})}>
                     <Text>About</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={styles.linkButton} onPress={() => this.props.navigation.navigate('LogoutScreen', {title: 'Log out'})}>
+                    <Text>Log out</Text>
+                </TouchableOpacity>
             </View>
         );
     }
