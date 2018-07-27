@@ -5,6 +5,7 @@ import {
 } from './AuthActionTypes';
 
 const INITIAL_STATE = {
+    isAuthenticated: false,
     email: '',
     username: '',
     username_or_email: '',
@@ -38,19 +39,19 @@ export default (state=INITIAL_STATE, action) => {
             return {...state, register_errors: null, register_loading: true};
 
         case REGISTER_SUCCESS:
-            return {...state, register_loading: false, user: action.payload};
+            return {...state, register_loading: false, user: action.payload, isAuthenticated: true};
 
         case REGISTER_FAIL:
-            return {...state, user: null, register_loading: false, register_errors: action.payload};
+            return {...state, user: null, register_loading: false, register_errors: action.payload, isAuthenticated: false};
 
         case ATTEMPT_LOGIN:
             return {...state, login_errors: null, login_loading: true};
 
         case LOGIN_SUCCESS:
-            return {...state, login_loading: false, user: action.payload};
+            return {...state, login_loading: false, user: action.payload, isAuthenticated: true};
 
         case LOGIN_FAIL:
-            return {...state, user: null, login_loading: false, login_errors: action.payload};
+            return {...state, user: null, login_loading: false, login_errors: action.payload, isAuthenticated: false};
 
         default:
             return state;

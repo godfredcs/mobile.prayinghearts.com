@@ -1,3 +1,4 @@
+import {AsyncStorage} from 'react-native';
 import {
     POST_TITLE_CHANGED, POST_BODY_CHANGED,
     ATTEMPT_CREATING_POST, CREATING_POST_SUCCESS, CREATING_POST_FAIL,
@@ -29,8 +30,10 @@ export const getAllPosts = () => async dispatch => {
     }
 };
 
-export const getMyPosts = (user_id) => async dispatch => {
+export const getMyPosts = () => async dispatch => {
     try {
+        const user_id = await AsyncStorage.getItem('user_id');
+
         const posts = await Post.showAll(user_id);
 
         if (posts) {

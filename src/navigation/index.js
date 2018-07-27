@@ -131,7 +131,7 @@ class MainNavigation extends Component {
             })
         }, {
             headerMode: 'none',
-            initialRouteName: "WelcomeScreen",
+            initialRouteName: this.props.isAuthenticated ? "Main" : "WelcomeScreen",
             navigationOptions: {
                 gesturesEnabled: false,
             }
@@ -150,4 +150,9 @@ class MainNavigation extends Component {
     }
 }
 
-export default connect(null, {getSocketId})(MainNavigation);
+const mapStateToProps = state => {
+    const {isAuthenticated} = state.auth;
+    return {isAuthenticated};
+}
+
+export default connect(mapStateToProps, {getSocketId})(MainNavigation);

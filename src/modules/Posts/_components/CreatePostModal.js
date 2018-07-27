@@ -32,7 +32,7 @@ class CreatePostModal extends React.Component {
 			>
 				<KeyboardAvoidingView behavior="padding" style={styles.container}>
                     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-                        <View style={{backgroundColor: '#FFF', margin: 20, borderRadius: 5, marginTop: 20}}>
+                        <View style={styles.innerContainer}>
                             <TouchableOpacity style={styles.closeButton} onPress={ close }>
                                 <Text style={{fontSize: 30}}>&times;</Text>
                             </TouchableOpacity>
@@ -59,8 +59,10 @@ class CreatePostModal extends React.Component {
 
                             <View style={{margin: 20}}>
                                 {
-                                    this.props.creating_post_loading
+									this.props.creating_post_loading
+
                                         ? <Spinner />
+
                                         : <CustomButton
                                             title="Post"
                                             color="#FFF"
@@ -84,6 +86,12 @@ const styles = {
 		position: 'relative',
 		justifyContent: 'center',
 		backgroundColor: 'rgba(0 , 0 , 0 , 0.75)'
+	},
+	innerContainer: {
+		backgroundColor: '#FFF',
+		margin: 20,
+		marginTop: 20,
+		borderRadius: 5
 	},
 	modalTitle: {
 		fontSize: 20,

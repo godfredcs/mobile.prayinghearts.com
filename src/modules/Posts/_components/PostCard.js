@@ -10,11 +10,12 @@ class PostCard extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', padding: 10}}>
-                    <Text style={{color: '#777', fontSize: 12}}>by: {this.props.post.user.username}</Text>
+                    <Text style={{color: '#777', fontSize: 12}}>{this.props.post.user.username}</Text>
                     <Text style={{color: '#777', fontSize: 12}}>{this.renderTime()}</Text>
                 </View>
 
                 <View style={{paddingVertical: 15, paddingHorizontal: 10}}>
+                    <Text style={{fontWeight: 'bold', fontSize: 14, marginBottom: 20}}>{this.props.post.title}</Text>
                     <Text>{this.props.post.body}</Text>
                 </View>
 

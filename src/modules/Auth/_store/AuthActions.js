@@ -31,17 +31,21 @@ export const confirmationPasswordChanged = payload => ({
     payload
 });
 
-export const attemptRegister = (user) => async dispatch => {
+export const attemptRegister = (details, navigateToMainScreen) => async dispatch => {
     try {
         dispatch({type: ATTEMPT_REGISTER});
-        console.log(`this is the user: ${user}`)
-        return;
-        const auth = await Auth.store(user);
 
-        if (auth) {
-            await AsyncStorage.setItem('api_token', auth.api_token);
-            console.log(`this is the user we got when we registered ${auth}`);
-            dispatch({type: REGISTER_SUCCESS, payload: auth});
+        const user = await Auth.store(details);
+
+        if (user) {
+            await AsyncStorage.setItem('api_token', user.api_token);
+            await AsyncStorage.setItem('user_id', user._id);
+
+            dispatch({type: REGISTER_SUCCESS, payload: user});
+
+            if (navigateToMainScreen) {
+                navigateToMainScreen();
+            }
         }
     } catch (error) {
         console.log(`these are the errors we get from registering ${error}`);
@@ -49,14 +53,17 @@ export const attemptRegister = (user) => async dispatch => {
     }
 };
 
-export const attemptLogin = ({username_or_email, password}, navigateToMainScreen) => async dispatch => {
+export const attemptLogin = (details, navigateToMainScreen) => async dispatch => {
     try {
         dispatch({type: ATTEMPT_LOGIN});
-        const auth = await Auth.authenticate({username_or_email, password});
 
-        if (auth) {
-            await AsyncStorage.setItem('api_token', auth.api_token);
-            dispatch({type: LOGIN_SUCCESS, payload: auth});
+        const user = await Auth.authenticate(details);
+
+        if (user) {
+            await AsyncStorage.setItem('api_token', user.api_token);
+            await AsyncStorage.setItem('user_id', user._id);
+
+            dispatch({type: LOGIN_SUCCESS, payload: user});
 
             if (navigateToMainScreen) {
                 navigateToMainScreen();

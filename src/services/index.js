@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import Axios from 'axios';
 
 export const axios = Axios.create({
-	baseURL: 'http://172.20.10.2:5000',
+	baseURL: 'http://192.168.8.101:5000',
 
 	headers: {
 		'X-Requested-With': 'XMLHttpRequest'
