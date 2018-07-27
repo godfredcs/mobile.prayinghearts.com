@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, NetInfo } from 'react-native';
 import { connect } from 'react-redux';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import { Entypo, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import {bottomScreenNavigationOptions, bottomStackNavigationOptions} from './config';
@@ -116,7 +116,7 @@ class MainNavigation extends Component {
                         headerMode: 'screen',
                         navigationOptions: bottomStackNavigationOptions('More')
                     }),
-                    navigationOptions: bottomScreenNavigationOptions('More', MaterialIcons, 'more-horiz')
+                    navigationOptions: bottomScreenNavigationOptions('More', Entypo, 'menu')
                 }
             }, {
                 tabBarOptions: {
@@ -131,7 +131,7 @@ class MainNavigation extends Component {
             })
         }, {
             headerMode: 'none',
-            initialRouteName: this.props.isAuthenticated ? "Main" : "WelcomeScreen",
+            initialRouteName: this.props.isFirstTime ? "WelcomeScreen" : !this.props.isAuthenticated ? "LoginScreen" : "Main",
             navigationOptions: {
                 gesturesEnabled: false,
             }
@@ -151,8 +151,8 @@ class MainNavigation extends Component {
 }
 
 const mapStateToProps = state => {
-    const {isAuthenticated} = state.auth;
-    return {isAuthenticated};
+    const {isFirstTime, isAuthenticated} = state.auth;
+    return {isFirstTime, isAuthenticated};
 }
 
 export default connect(mapStateToProps, {getSocketId})(MainNavigation);

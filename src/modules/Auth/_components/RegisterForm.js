@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {Feather} from '@expo/vector-icons';
 
 import {
-    emailChanged, usernameChanged, passwordChanged, confirmationPasswordChanged
+    emailChanged, usernameChanged, passwordChanged, confirmationPasswordChanged,
+    attemptRegister
 } from '../_store/AuthActions';
 
 import Colors from '../../../constants/Colors';
@@ -15,6 +16,12 @@ class RegisterForm extends Component {
 
     componentDidUpdate() {
         LayoutAnimation.spring();
+    }
+
+    attemptRegister = () => {
+        const {email, username, password, password_confirmation} = this.props;
+
+        this.props.attemptRegister({email, username, password, password_confirmation});
     }
 
     render() {
@@ -64,7 +71,7 @@ class RegisterForm extends Component {
                                 title="Register"
                                 color={Colors.secondary}
                                 containerStyle={{borderWidth: 1, borderColor: Colors.secondary, borderRadius: 30, marginBottom: 0}}
-                                onPress={() => this.props.navigation.navigate('Main')}
+                                onPress={this.attemptRegister}
                             />
                     }
                 </View>
@@ -88,5 +95,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-    emailChanged, usernameChanged, passwordChanged, confirmationPasswordChanged
+    emailChanged, usernameChanged, passwordChanged, confirmationPasswordChanged,
+    attemptRegister
 })(RegisterForm);

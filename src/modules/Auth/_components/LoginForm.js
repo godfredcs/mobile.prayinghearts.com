@@ -14,7 +14,7 @@ class LoginForm extends Component {
 
     attemptLogin = () => {
         const {username_or_email, password} = this.props;
-        this.props.attemptLogin({username_or_email, password}, () => this.props.navigation.navigate('Main'));
+        this.props.attemptLogin({username_or_email, password});
     }
 
     render() {
@@ -23,6 +23,7 @@ class LoginForm extends Component {
                 <View style={{ width: '100%', marginVertical: 20 }}>
                     <CustomInput
                         placeholder="Email / Username"
+                        keyboardType="email-address"
                         onChangeText={value => this.props.usernameOrEmailChanged(value)}
                     />
                 </View>

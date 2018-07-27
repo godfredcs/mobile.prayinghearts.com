@@ -29,12 +29,13 @@ class MoreScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF'
+        backgroundColor: '#EEE'
     },
     linkButton: {
         padding: 20,
         borderBottomWidth: 1,
-        borderColor: '#EEE'
+        borderColor: '#EEE',
+        backgroundColor: '#FFF'
     }
 });
 

@@ -5,11 +5,7 @@ import {attemptLogout} from '../_store/AuthActions';
 
 class LogoutScreen extends React.Component {
     componentDidMount() {
-        this.props.attemptLogout(this.navigateToLoginScreen);
-    }
-
-    navigateToLoginScreen = () => {
-        this.props.navigation.navigate('LoginScreen');
+        this.props.attemptLogout();
     }
 
     render() {

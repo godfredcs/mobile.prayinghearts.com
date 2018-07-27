@@ -32,7 +32,7 @@ export const confirmationPasswordChanged = payload => ({
     payload
 });
 
-export const attemptRegister = (details, navigateToMainScreen) => async dispatch => {
+export const attemptRegister = details => async dispatch => {
     try {
         dispatch({type: ATTEMPT_REGISTER});
 
@@ -43,10 +43,6 @@ export const attemptRegister = (details, navigateToMainScreen) => async dispatch
             await AsyncStorage.setItem('user_id', user._id);
 
             dispatch({type: REGISTER_SUCCESS, payload: user});
-
-            if (navigateToMainScreen) {
-                navigateToMainScreen();
-            }
         }
     } catch (error) {
         console.log(`these are the errors we get from registering ${error}`);
@@ -54,7 +50,7 @@ export const attemptRegister = (details, navigateToMainScreen) => async dispatch
     }
 };
 
-export const attemptLogin = (details, navigateToMainScreen) => async dispatch => {
+export const attemptLogin = details => async dispatch => {
     try {
         dispatch({type: ATTEMPT_LOGIN});
 
@@ -65,10 +61,6 @@ export const attemptLogin = (details, navigateToMainScreen) => async dispatch =>
             await AsyncStorage.setItem('user_id', user._id);
 
             dispatch({type: LOGIN_SUCCESS, payload: user});
-
-            if (navigateToMainScreen) {
-                navigateToMainScreen();
-            }
         }
     } catch (error) {
         console.log(`these are the errors we get from login ${JSON.stringify(error)}`);
@@ -76,16 +68,12 @@ export const attemptLogin = (details, navigateToMainScreen) => async dispatch =>
     }
 };
 
-export const attemptLogout = navigateToLoginScreen => async dispatch => {
+export const attemptLogout = () => async dispatch => {
     try {
         dispatch({type: ATTEMPT_LOGOUT});
 
         await AsyncStorage.removeItem('user_id');
         await AsyncStorage.removeItem('api_token');
-
-        if (navigateToLoginScreen) {
-            navigateToLoginScreen();
-        }
 
         dispatch({type: LOGOUT_SUCCESS});
     } catch (error) {

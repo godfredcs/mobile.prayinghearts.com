@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import {StyleSheet, TextInput} from 'react-native';
 import Colors from '../constants/Colors';
 
-export default ({placeholder, secureTextEntry, onChangeText}) => (
+export default ({placeholder, secureTextEntry, keyboardType="default", onChangeText}) => (
     <TextInput
         secureTextEntry={secureTextEntry}
         style={styles.container}
         placeholder={placeholder}
+        keyboardType={keyboardType}
         underlineColorAndroid="transparent"
         onChangeText={onChangeText}
     />
